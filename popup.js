@@ -1,26 +1,27 @@
-let changeColor = document.getElementById("changeColor");
-let changePre = document.getElementById("changePre");
+let speedUp = document.getElementById("speedUp");
+let speedDown = document.getElementById("speedDown");
+let currentSpeed = document.getElementById("currentSpeed");
 
 chrome.storage.sync.get("color", ({ color }) => {
-	changeColor.style.backgroundColor = color;
+	speedUp.style.backgroundColor = color;
 });
 
 
-// When the button is clicked, inject setPageBackgroundColor into current page
-changeColor.addEventListener("click", async () => {
+// When the button is clicked, inject increasePlayBackSpeed into current page
+speedUp.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
-    function: setPageBackgroundColor,
+    function: increasePlayBackSpeed,
   });
 });
-changePre.addEventListener("click", async () => {
+speedDown.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
-    function: setPageBackgroundColor2,
+    function: decreasePlayBackSpeed,
   });
 });
 
@@ -35,19 +36,19 @@ changePre.addEventListener("click", async () => {
 
 // The body of this function will be executed as a content script inside the
 // current page
-function setPageBackgroundColor() {
+function increasePlayBackSpeed() {
   chrome.storage.sync.get("color", ({ color }) => {
 
 		document.getElementsByTagName("video")[0].playbackRate += 0.5;
 		console.log(document.getElementsByTagName("video")[0].playbackRate);
-		changeColor.textContent = document.getElementsByTagName("video")[0].playbackRate;
+		currentSpeed.textContent = document.getElementsByTagName("video")[0].playbackRate;
   });
 }
-function setPageBackgroundColor2() {
+function decreasePlayBackSpeed() {
   chrome.storage.sync.get("color", ({ color }) => {
 
-		document.getElementsByTagName("video")[0].playbackRate = 1;
+		document.getElementsByTagName("video")[0].playbackRate -= 0.5;
 		console.log(document.getElementsByTagName("video")[0].playbackRate);
-		changePre.innerHTML = document.getElementsByTagName("video")[0].playbackRate;
+
   });
 }
