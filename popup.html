@@ -2,11 +2,11 @@
 <html>
   <head>
     <link rel="stylesheet" href="button.css">
+    <script src="popup.js" defer></script>
   </head>
-  <body>
-    <button id="speedUp">+</button>
-    <span id="currentSpeed">???</span>
-    <button id="speedDown">-</button>
-		<script src="popup.js"></script>
+  <body class="popup">
+    <div class="popup__button popup__button_color-plus popup__button_text" id="speedUp" >+</div>
+    <div class="popup__speedometer" id="currentSpeed" >speed</div>
+    <div class="popup__button popup__button_color-min popup__button_text"  id="speedDown" >-</div>
   </body>
 </html>
