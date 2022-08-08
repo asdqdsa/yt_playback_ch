@@ -1,10 +1,10 @@
-/* let color = '#3aa757';
-let speed;
+/* let color = '#1b3dd8';
 
 chrome.runtime.onInstalled.addListener(() => {
 	chrome.storage.sync.set({ color });
 	console.log('Default background color set to %cblack', `color: ${color}`);
-}); */
+});
+ */
 
 /* window.postMessage({
 	type: "FROM_PAGE_TO_POPUP",
@@ -41,4 +41,26 @@ chrome.runtime.onInstalled.addListener(() => {
 /* 	window.addEventListener("message", function(event) {
 		document.getElementById("currentSpeed").textContent = event.data.type;
 	});
+ */
+/* 	chrome.runtime.onInstalled.addListener((tab) => {
+		console.log('installed');
+	}); */
+
+/* 	chrome.runtime.onMessage.addListener((request, sender, response) => {
+		console.log(request);
+	});
+
+chrome.tabs.onUpdated.addListener((tabId, tab) => {
+	if ( tab.url && tab.url.includes("youtube.com/watch")) {
+		const queryParams = tab.url.split("?")[1];
+		const urlParams = new URLSearchParams(queryParams);
+		console.lpg(urlParams);
+
+		chrome.tabs.sendMessage(tabId, {
+			type: "NEW",
+			videoId: urlParams.get("v"),
+			text: "backend says hi",
+		});
+	}
+});
  */
