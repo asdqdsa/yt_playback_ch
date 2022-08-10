@@ -1,5 +1,5 @@
 let speedUp = document.getElementById("speedUp");
-let speedDown = document.getElementById("slowDown");
+let slowDown = document.getElementById("slowDown");
 let currentSpeed = document.getElementById("currentSpeed");
 
 // Updates currentSpeed when popup is opened
@@ -28,7 +28,7 @@ speedUp.addEventListener("click", async () => {
   currentSpeed.textContent = actaulSpeed + 0.5;
 });
 
-speedDown.addEventListener("click", async () => {
+slowDown.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
